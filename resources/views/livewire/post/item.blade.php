@@ -7,7 +7,7 @@
 
     <header class="flex items-center gap-3">
 
-        <x-avatar src="https://source.unsplash.com/500x500?face-{{rand(0,10)}}" class="w-9 h-9" />
+        <x-avatar src="{{asset('assets/avatar.png')}}" class="w-9 h-9" />
 
         <div class="grid grid-cols-7 w-full gap-2">
             <div class="col-span-5">
