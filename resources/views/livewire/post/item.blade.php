@@ -66,9 +66,8 @@
                 <div x-cloak class="swiper-wrapper">
                     <!-- Slides -->
                     <div class="swiper-slide"> <x-video /> </div>
-                    <div class="swiper-slide"> <img src="https://images.pexels.com/photos/17342296/pexels-photo-17342296/free-photo-of-balloons-flying-over-the-canyons.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="" class="h-[500px] w-full block object-scale-down"> </div>
-                    <div class="swiper-slide"> <img src="https://images.pexels.com/photos/17342296/pexels-photo-17342296/free-photo-of-balloons-flying-over-the-canyons.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="" class="h-[500px] w-full block object-scale-down"> </div>
-                    <div class="swiper-slide"> <img src="https://images.pexels.com/photos/17342296/pexels-photo-17342296/free-photo-of-balloons-flying-over-the-canyons.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="" class="h-[500px] w-full block object-scale-down"> </div>
+                    <div class="swiper-slide"> <img src="assets/b.jpg" alt="" class="h-[500px] w-full block object-scale-down"> </div>
+                    <div class="swiper-slide"> <img src="assets/c.jpg" alt="" class="h-[500px] w-full block object-scale-down"> </div>
 
 
                 </div>
