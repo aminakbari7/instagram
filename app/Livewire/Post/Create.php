@@ -31,10 +31,6 @@ class Create extends ModalComponent
     function submit()
     {
 
-
-
-
-
         #validate
         $this->validate([
 
@@ -43,13 +39,8 @@ class Create extends ModalComponent
             'hide_like_view'=>'boolean',
 
         ]);
-
-
-
         #Determine if Reel or Post
         $type= $this->getPostType($this->media);
-
-
         #create post
         $post=  Post::create(
             [
@@ -61,9 +52,6 @@ class Create extends ModalComponent
             'type'=>$type
             ]
             );
-
-
-
         #add Media
         foreach ($this->media as $key => $media) {
             #first get mime type by creating helper function
@@ -90,10 +78,6 @@ class Create extends ModalComponent
 
         $this->reset();
         $this->dispatch('close');
-
-
-
-
         #dispatch to listen livewire component Home
         #reference livewire docs
         $this->dispatch('post-created',$post->id);
@@ -102,13 +86,6 @@ class Create extends ModalComponent
         #add this
         #In next video Get banner from pines-UI and add it to the layout
         return   $this->dispatch('created');
-
-
-
-
-
-
-
 
     }
 
@@ -139,10 +116,6 @@ class Create extends ModalComponent
         }
 
     }
-
-
-
-
 
     /**
      * Supported: 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl'
