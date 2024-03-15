@@ -11,8 +11,6 @@ use LivewireUI\Modal\ModalComponent;
 
 class Create extends ModalComponent
 {
-
-
     use WithFileUploads;
 
     public $media=[];
