@@ -1,10 +1,8 @@
 <div class="grid lg:grid-cols-12 gap-3 h-full w-full overflow-hidden  ">
 
-    <aside class=" lg:col-span-7  m-auto items-center w-full overflow-scroll  ">
-
+    <aside class=" hidden lg:flex lg:col-span-7  m-auto items-center w-full overflow-scroll  ">
         {{-- CSS Snap scroll --}}
-        <div
-            class=" relative flex overflow-x-scroll overscroll-x-contain w-[500px] h-96 snap-x snap-mandatory gap-2 px-2 ">
+        <div class=" relative flex overflow-x-scroll overscroll-x-contain w-[500px]  snap-x snap-mandatory gap-2 px-2 ">
 
             @foreach ($post->media as $key=> $file)
             <div class=" w-full h-full shrink-0 snap-always snap-center">
@@ -32,27 +30,25 @@
         class="lg:col-span-5 h-full   scrollbar-hide  relative flex gap-4 flex-col overflow-hidden overflow-y-scroll  ">
 
         <header class="flex items-center gap-3 border-b py-2
-                 {{-- new classses --}}  sticky  top-0 bg-white z-10  {{-- new classses --}}
+                  sticky  top-0 bg-white z-10
              ">
 
             <x-avatar src="https://source.unsplash.com/500x500?face-{{rand(0,10)}}" class="w-9 h-9" />
 
-            <div class="grid grid-cols-7 w-full gap-2">
+            <div class="grid grid-cols-7 w-full {{-- new classses --}} items-center {{-- new classses --}} gap-2">
                 <div class="col-span-5">
                     <h5 class="font-semibold truncate text-sm">{{$post->user->name}} </h5>
                 </div>
 
-                <div class="col-span-2 flex text-right justify-end">
+                <div class="col-span-2 flex gap-3 text-right justify-end">
 
-                    <button class="font-bold text-sm text-gray-500 ml-auto">
-
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                            <path
-                                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                    <button wire:click="$dispatch('closeModal')" class="font-bold text-sm text-gray-500 ml-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.9"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                         </svg>
-                    </button>
 
+                    </button>
                 </div>
             </div>
 
@@ -61,141 +57,45 @@
 
         <main class="  space-y-3">
 
+            @if ($post->allow_commenting)
+
+            @if ($comments)
+
+            @foreach ($comments as $comment)
+
             {{-- Comment item --}}
-            <section class="flex flex-col gap-2">
-
+            <section>
                 {{-- comment --}}
-                <div class="flex items-center gap-3  py-2 ">
+                @include('livewire.post.view.partials.comment')
 
-                    <x-avatar src="https://source.unsplash.com/500x500?face-{{rand(0,10)}}" class="w-8 h-8 mb-auto" />
+                @if ($comment->replies->count() > 0)
 
-                    <div class="grid grid-cols-7 w-full gap-2">
-                        {{-- comment --}}
-                        <div class="col-span-6   flex flex-wrap text-sm ">
-                            <p>
-
-                            <span class="font-bold text-sm">{{$post->user->name}} </span>
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. P neque ducimus blanditiis nihil voluptatum, ve
-                            </p>
-
-                        </div>
-
-                        {{-- Like --}}
-                        <div class="col-span-1 flex text-right justify-end mb-auto">
-                            <button class="font-bold text-sm  0 ml-auto">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                    stroke="currentColor" class="w-3 h-3">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                                </svg>
-
-                            </button>
-                        </div>
-
-                        {{-- Footer --}}
-                        <div class="col-span-7 flex gap-2 text-xs text-gray-700">
-
-                            <span class=""> 2d</span>
-                            <span class="font-bold"> 345 Likes</span>
-                            <span class="font-semibold"> Reply</span>
-
-                        </div>
-                    </div>
-
-                </div>
-
+                @foreach ($comment->replies as $reply)
                 {{-- reply --}}
-                <div class="flex items-center gap-3 w-11/12 ml-auto py-2 ">
+                @include('livewire.post.view.partials.reply')
+                @endforeach
 
-                    <x-avatar src="https://source.unsplash.com/500x500?face-{{rand(0,10)}}" class="w-8 h-8 mb-auto" />
-
-                    <div class="grid grid-cols-7 w-full gap-2">
-                        {{-- comment --}}
-                        <div class="col-span-6   flex flex-wrap text-sm ">
-                            <p>
-
-                            <span class="font-bold text-sm">{{$post->user->name}} </span>
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. P neque ducimus blanditiis nihil voluptatum, ve
-                            </p>
-
-                        </div>
-
-                        {{-- Like --}}
-                        <div class="col-span-1 flex text-right justify-end mb-auto">
-                            <button class="font-bold text-sm  0 ml-auto">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                    stroke="currentColor" class="w-3 h-3">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                                </svg>
-
-                            </button>
-                        </div>
-
-                        {{-- Footer --}}
-                        <div class="col-span-7 flex gap-2 text-xs text-gray-700">
-
-                            <span class=""> 2d</span>
-                            <span class="font-bold"> 345 Likes</span>
-                            <span class="font-semibold"> Reply</span>
-
-                        </div>
-                    </div>
-
-                </div>
-           </section>
-
-
-           {{-- Comment item --}}
-           <section>
-                {{-- comment --}}
-            <div class="flex items-center gap-3  py-2 ">
-
-                <x-avatar src="https://source.unsplash.com/500x500?face-{{rand(0,10)}}" class="w-8 h-8 mb-auto" />
-
-                <div class="grid grid-cols-7 w-full gap-2">
-                    {{-- comment --}}
-                    <div class="col-span-6   flex flex-wrap text-sm ">
-                        <p>
-
-                        <span class="font-bold text-sm">{{$post->user->name}} </span>
-                          Lorem ipsum dolor, sit amet consectetur adipisicing elit. P neque ducimus blanditiis nihil voluptatum, ve
-                        </p>
-
-                    </div>
-
-                    {{-- Like --}}
-                    <div class="col-span-1 flex text-right justify-end mb-auto">
-                        <button class="font-bold text-sm  0 ml-auto">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="w-3 h-3">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                            </svg>
-
-                        </button>
-                    </div>
-
-                    {{-- Footer --}}
-                    <div class="col-span-7 flex gap-2 text-xs text-gray-700">
-
-                        <span class=""> 2d</span>
-                        <span class="font-bold"> 345 Likes</span>
-                        <span class="font-semibold"> Reply</span>
-
-                    </div>
-                </div>
-
-            </div>
-           </section>
+                @endif
 
 
 
+            </section>
+            @endforeach
+
+            @else
+
+
+            No commnets
+
+            @endif
+
+
+
+            @endif
 
         </main>
 
         <footer class="  {{-- new classses --}}mt-auto sticky border-t bottom-0 z-10 bg-white ">
-
 
             {{-- actions --}}
             <div class="flex gap-4 items-center my-2">
@@ -230,6 +130,8 @@
                             d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
                     </svg>
                 </span>
+
+
             </div>
 
             {{-- Likes or views --}}
@@ -244,20 +146,25 @@
 
             {{-- View Post Modal--}}
             <button
-                onclick="Livewire.dispatch('openModal',{ component: 'post.view.modal', arguments:{'post':{{$post->id}}}})"
-                class="text-slate-500/90 text-sm font-medium">View all 345 comments</button>
+                class="text-slate-500/90 text-sm font-medium" wire:ignore>Total {{$post->comments->count()}}
+                comments</button>
+
+@if ($post->allow_commenting)
 
             {{-- Leave comment --}}
 
-            <form class="grid grid-cols-12 items-center w-full py-2  " x-data="{ inputText: '' }">
+            <form wire:key="{{time()}}" x-data="{
+                body: @entangle('body'),
+                parent_id: @entangle('parent_id')
+             }" @submit.prevent="$wire.addComment()" class="grid grid-cols-12 items-center w-full py-2  ">
                 @csrf
                 <input placeholder="Leave a comment" type="text"
                     class="border-0 col-span-10 l py-2  placeholder:text-sm text-sm outline-none w-full focus:outline-none px-0 rounded-lg hover:ring-0 focus:ring-0"
-                    x-model="inputText">
+                    x-model="body">
 
                 <div class="col-span-1 ml-auto flex justify-end text-right  ">
-                    <button x-cloak class="text-sm font-semibold flex justify-end text-blue-500"
-                        x-show="inputText.length > 0">Post</button>
+                    <button type="submit" x-cloak class="text-sm font-semibold flex justify-end text-blue-500"
+                        x-show="body.length > 0">Post</button>
 
                 </div>
 
@@ -270,12 +177,12 @@
 
                 </span>
             </form>
+            @endif
 
         </footer>
 
 
 
     </aside>
-
 
 </div>
