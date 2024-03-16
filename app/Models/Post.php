@@ -30,4 +30,9 @@ class Post extends Model
 
         return $this->belongsTo(User::class);
     }
+
+    function comments() : MorphMany {
+
+        return  $this->morphMany(Comment::class,'commentable')->with('replies');
+     }
 }
