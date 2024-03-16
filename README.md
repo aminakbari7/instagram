@@ -1,5 +1,5 @@
-# instagram
-<ul dir="auto" placeholder="tables">
+#tables
+<ul dir="auto">
 <li>user</li>
 <li>post</li>
 <li>comment</li>
