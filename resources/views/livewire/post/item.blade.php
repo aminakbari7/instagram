@@ -1,13 +1,10 @@
 <div class="max-w-lg mx-auto  ">
-
     {{------------}}
     {{--Header----}}
     {{------------}}
-
-
     <header class="flex items-center gap-3">
 
-        <x-avatar src="{{asset('assets/avatar.png')}}" class="w-9 h-9" />
+        <x-avatar src="https://source.unsplash.com/500x500?face-{{rand(0,10)}}" class="w-9 h-9" />
 
         <div class="grid grid-cols-7 w-full gap-2">
             <div class="col-span-5">
@@ -169,19 +166,44 @@
         </div>
 
         {{-- View Post Modal--}}
-        <button onclick="Livewire.dispatch('openModal',{ component: 'post.view.modal', arguments:{'post':{{$post->id}}}})" class="text-slate-500/90 text-sm font-medium">View all {{ $post->comments->count() }} comments</button>
+        <button onclick="Livewire.dispatch('openModal',{ component: 'post.view.modal', arguments:{'post':{{$post->id}}}})" class="text-slate-500/90 text-sm font-medium">View all {{$post->comments->count()}} comments</button>
+
+        @auth
+        {{-- Show auth comments  --}}
+        <ul class="my-2">
+            @foreach ($post->comments()->where('user_id',auth()->id())->get() as $comment)
+            <li class="grid grid-cols-12 text-sm items-center">
+
+                <span class="font-bold col-span-2  mb-auto">{{auth()->user()->name}}</span>
+                <span class="col-span-9">{{$comment->body}}</span>
+                <button class="col-span-1  mb-auto flex justify-end pr-px">
+                    {{-- heart from heroicons --}}
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.9" stroke="currentColor" class="w-3 h-3">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                      </svg>
+                </button>
+
+
+            </li>
+            @endforeach
+
+        </ul>
+        @endauth
+
 
         {{-- Leave comment --}}
 
-        <form class="grid grid-cols-12 items-center w-full  " x-data="{ inputText: '' }">
+        <form
+        wire:key='{{time()}}'
+        @submit.prevent="$wire.addComment()" class="grid grid-cols-12 items-center w-full  " x-data="{ body: @entangle('body') }">
             @csrf
             <input placeholder="Leave a comment" type="text"
                 class="border-0 col-span-10 placeholder:text-sm text-sm outline-none w-full focus:outline-none px-0 rounded-lg hover:ring-0 focus:ring-0"
-                x-model="inputText">
+                x-model="body">
 
             <div class="col-span-1 ml-auto flex justify-end text-right  ">
-                <button x-cloak class="text-sm font-semibold flex justify-end text-blue-500"
-                    x-show="inputText.length > 0">Post</button>
+                <button type="submit" x-cloak class="text-sm font-semibold flex justify-end text-blue-500"
+                    x-show="body.length > 0">Post</button>
 
             </div>
 
