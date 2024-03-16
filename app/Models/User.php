@@ -9,11 +9,14 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Sanctum\HasApiTokens;
+use Overtrue\LaravelLike\Traits\Liker;
 
 
 class User extends Authenticatable
 {
+
     use HasFactory, Notifiable;
+    use Liker;
 
     /**
      * The attributes that are mass assignable.
