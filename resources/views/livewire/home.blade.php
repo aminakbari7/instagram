@@ -1,7 +1,34 @@
-<div class="w-full h-full">
+<div
+x-data="{
+
+  canLoadMore:@entangle('canLoadMore')
+
+}"
+
+
+@scroll.window.trottle="
+
+  scrollTop= window.scrollY ||window.scrollTop;
+  divHeight= window.innerHeight||document.documentElement.clientHeight;
+  scrollHeight = document.documentElement.scrollHeight;
+
+
+  isScrolled= scrollTop+ divHeight >= scrollHeight-1;
+
+  {{-- Check if user can load more  --}}
+
+  if(isScrolled && canLoadMore){
+
+    @this.loadMore();
+  }
+
+
+"
+
+class="w-full h-full">
 
     {{-- Header --}}
-    <header class="md:hidden sticky top-0 bg-white">
+    <header class="md:hidden sticky top-0 z-50 bg-white">
 
       <div class="grid grid-cols-12 gap-2 items-center">
 
@@ -42,15 +69,18 @@
 
 
     {{-- main --}}
+
     <main class="grid lg:grid-cols-12 gap-8 md:mt-10 ">
+
         <aside class="lg:col-span-8   overflow-hidden  ">
+
             {{-- Stories --}}
             <section>
                 <ul class="flex overflow-x-auto  items-center gap-2">
 
                   @for ($i = 0; $i < 10; $i++)
                   <li class="flex flex-col justify-center w-20 gap-1 p-2">
-                    <x-avatar story src="assets\avatar.png" class="h-14 w-14" />
+                    <x-avatar story src="{{asset('assets/avatar.png')}}" class="h-14 w-14" />
                     <p class="text-xs font-medium truncate"> {{fake()->name}} </p>
                   </li>
                   @endfor
@@ -58,17 +88,26 @@
 
             </section>
 
-            {{-- -post --}}
+            {{-- posts --}}
             <section class="mt-5 space-y-4 p-2">
-                @if($posts)
-                @foreach ($posts as $post )
+
+
+              @if ($posts)
+
+              @foreach ($posts as $post)
+
                 <livewire:post.item wire:key="post-{{$post->id}}"  :post="$post" />
-                @endforeach
-                @else
-                    <p>no post</p>
-                @endif
+
+              @endforeach
+
+              @else
+
+              <p class="font-bol flex justify-center">No posts</p>
+
+              @endif
 
             </section>
+
 
         </aside>
 
@@ -78,7 +117,7 @@
 
             <div class="flex items-center gap-2">
 
-              <x-avatar src="assets\avatar.png" class="w-12 h-12" />
+              <x-avatar src="{{asset('assets/avatar.png')}}" class="w-12 h-12" />
               <h4 class="font-medium">{{fake()->name}} </h4>
 
             </div>
@@ -93,7 +132,7 @@
                 @for ($i = 0; $i < 5; $i++)
 
                 <li class="flex items-center gap-3">
-                  <x-avatar src="assets\avatar.png" class="w-12 h-12" />
+                  <x-avatar src="{{asset('assets/avatar.png')}}" class="w-12 h-12" />
 
                   <div class="grid grid-cols-7 w-full gap-2">
                     <div class="col-span-5">
@@ -139,8 +178,15 @@
               </ol>
 
               <h3 class="text-gray-800/90 mt-6 text-sm"> @ 2023 INTAGRAM COURSE </h3>
+
+
             </section>
+
+
+
         </aside>
+
+
     </main>
 
 </div>
