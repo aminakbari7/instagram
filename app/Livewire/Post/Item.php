@@ -20,8 +20,15 @@ class Item extends Component
         abort_unless(auth()->check(),401);
         auth()->user()->toggleLike($this->post);
 
+    }
+
+    function toggleFavorite()  {
+
+        abort_unless(auth()->check(),401);
+        auth()->user()->toggleFavorite($this->post);
 
     }
+
 
     function toggleCommentLike(Comment $comment)  {
 
