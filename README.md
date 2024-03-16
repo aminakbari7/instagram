@@ -13,7 +13,10 @@
 #way to run
 <ul dir="auto">
 <li>composer install or composer update</li>
+<li>npm install</li>
 <li>php artisan storage:link</li>
 <li>Php artisan migrate</li>
 <li>Php artisan  key:generate</li>
+<li>Php artisan  serv and npm run dev</li>
+
 </ul>
