@@ -3,9 +3,9 @@
 <li>user</li>
 <li>post</li>
 <li>comment</li>
-
+<li>followables</li>
 <li>like</li>
-
+<li>favorite</li>
 <li>media</li>
 </ul>
 <br>
