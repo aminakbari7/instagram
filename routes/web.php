@@ -23,7 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/{user}/saved',Saved::class)->name('profile.saved');
 
     Route::get('/',Home::class);
-    Route::get('/Explore',Explore::class);
+    Route::get('/explore',Explore::class)->name('explore');
 
 
 });
