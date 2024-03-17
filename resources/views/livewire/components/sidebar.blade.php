@@ -163,15 +163,13 @@
                 <h4 x-cloak x-show="!(shrink||drawer)" class=" text-lg font-medium">Messages</h4>
             </a></li>
 
-        <li><a class="flex items-center gap-5">
-
+        <li><a   href="{{route('notifications',auth()->user()->username)}}"  class="flex items-center gap-5">
                 <span>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.9"
                         stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                     </svg>
-
                     {{--
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                         <path
@@ -181,10 +179,9 @@
                     --}}
 
                 </span>
-
-                <h4 x-cloak x-show="!(shrink||drawer)" class=" text-lg font-medium">Notifications</h4>
+                <h4 x-cloak x-show="!(shrink||drawer)"
+                class=" text-lg  {{request()->routeIs('notifications')?'font-bold':'font-medium'}} ">Notifications</h4>
             </a></li>
-
         <li>
             <div onclick="Livewire.dispatch('openModal',{ component: 'post.create' })" class="flex items-center gap-5">
 
@@ -279,7 +276,7 @@
     {{-- TODO: When you create sidebar as livewire component use @teleport blade directive --}}
 
     <div @click.outside="drawer=false; showSearch =false;showNotifications=false" x-cloak x-show="drawer"
-        x-transition.origin.left class="fixed inset-y-0 left-[70px] relatve px-4 w-96 overflow-y-scroll
+        x-transition.origin.left class="fixed inset-y-0 left-[40px] relatve px-4 w-96 overflow-y-scroll
               overflow-x-hidden overscroll-contain bg-white shadow border rounded-r-2xl z-50">
 
 
@@ -331,10 +328,6 @@
 
             </div>
         </template>
-
-
-
-
     </div>
 
 </div>
