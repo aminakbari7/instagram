@@ -1,0 +1,29 @@
+<?php
+
+namespace App\Livewire\Post\View;
+
+use App\Models\Post;
+use Livewire\Component;
+
+class Page extends Component
+{
+
+    public $post;
+    function mount()  {
+
+        $this->post=Post::findOrFail($this->post);
+
+    }
+    public function render()
+    {
+        return <<<'HTML'
+          <main class="">
+
+                <div class="my-auto border p-2  h-[calc(100vh_-_3.5rem)]">
+                <livewire:post.view.item :post="$this->post" />
+                </div>
+
+            </main>
+        HTML;
+    }
+}
