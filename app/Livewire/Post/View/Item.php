@@ -16,7 +16,12 @@ class Item extends Component
 
     public $body;
     public $parent_id=null;
+    function toggleFavorite()  {
 
+        abort_unless(auth()->check(),401);
+        auth()->user()->toggleFavorite($this->post);
+
+    }
     function togglePostLike()  {
 
         abort_unless(auth()->check(),401);
