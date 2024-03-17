@@ -144,13 +144,12 @@ if (isScrolled && canLoadMore)
 
 
                     <li class="flex items-center gap-3">
-
+                        <a href="{{route('profile.home',$user->username) }}">
                         <x-avatar wire:ignore src="https://source.unsplash.com/500x500?face-{{rand(0,10)}}" class="w-12 h-12" />
-
-
+                        </a>
                         <div class="grid grid-cols-7 w-full gap-2">
                             <div class="col-span-5">
-                                <h5 class="font-semibold truncate text-sm">{{$user->name}} </h5>
+                                <a href="{{route('profile.home',$user->username) }}"  class="font-semibold truncate text-sm">{{$user->name}} </a>
                                 <p class="text-xs truncate">Followed by {{fake()->name}} </p>
                             </div>
 
