@@ -7,7 +7,7 @@ use App\Models\User;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Component;
-
+use App\Notifications\NewFollowerNotification;
 class Home extends Component
 {
 
@@ -25,6 +25,11 @@ class Home extends Component
     function toggleFollow()  {
         abort_unless(auth()->check(),401);
         auth()->user()->toggleFollow($this->user);
+        if (auth()->user()->isFollowing($this->user)) {
+
+            $this->user->notify(new NewFollowerNotification(auth()->user()));
+
+        }
     }
 
 
