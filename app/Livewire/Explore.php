@@ -15,6 +15,8 @@ class Explore extends Component
 
          $this->js("history.replaceState({}, '', '/explore')");
      }
+
+
     public function render()
     {
 
