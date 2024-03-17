@@ -8,7 +8,6 @@ use Livewire\Component;
 
 class Explore extends Component
 {
-
      #!!!import use Livewire\Attributes\On;
      #[On('closeModal')]
      public function revertUrl()
@@ -16,8 +15,6 @@ class Explore extends Component
 
          $this->js("history.replaceState({}, '', '/explore')");
      }
-
-
     public function render()
     {
 
