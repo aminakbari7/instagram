@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Livewire\Components\Sidebar;
 use App\Livewire\Explore;
 use App\Livewire\Home;
 use App\Livewire\Profile\Home as ProfileHome;
