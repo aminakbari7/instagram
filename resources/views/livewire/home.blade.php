@@ -29,7 +29,6 @@ if (isScrolled && canLoadMore)
     {{------------}}
     <header class="md:hidden sticky top-0 z-50 bg-white">
         <div class="grid grid-cols-12 gap-2 items-center">
-
             <div class="col-span-3">
                 <img src="{{asset('assets/logo.png')}}" class="h-12 max-w-lg w-full" alt="Logo">
             </div>
