@@ -7,7 +7,8 @@ use App\Models\Post;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Livewire\Attributes\On;
-
+use App\Notifications\PostLikedNotification;
+use App\Notifications\NewCommentNotification;
 class Item extends Component
 {
 
@@ -41,7 +42,7 @@ class Item extends Component
         $this->validate(['body'=>'required']);
 
         #create comment
-        Comment::create([
+        $comment= Comment::create([
             'body'=>$this->body,
             'parent_id'=>$this->parent_id,
             'commentable_id'=>$this->post->id,
@@ -49,6 +50,14 @@ class Item extends Component
             'user_id'=>auth()->id()
 
         ]);
+ #Notifiy User
+        #make sure post does not belong to auth
+        if ($this->post->user_id != auth()->id()) {
+
+            $this->post->user->notify(new NewCommentNotification(auth()->user(),$comment));
+
+         }
+
 
         $this->reset( ['body']);
 
