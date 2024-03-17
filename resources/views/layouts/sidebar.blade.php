@@ -162,10 +162,10 @@
 
 
 
-        <li><a class="flex items-center gap-5">
+        <li><a href="{{ route('profile.home',auth()->user()->username) }}" class="flex items-center gap-5">
 
 
-                <x-avatar class=" w-7 h-7 shrink-0" />
+                <x-avatar  class=" w-7 h-7 shrink-0" />
 
                 <h4 x-cloak x-show="!(shrink||drawer)"  class=" text-lg font-medium">Profile</h4>
             </a></li>
