@@ -6,6 +6,7 @@ use App\Livewire\Home;
 use App\Livewire\Profile\Home as ProfileHome;
 use App\Livewire\Profile\Reels;
 use App\Livewire\Profile\Saved;
+use App\Livewire\Reels as LivewireReels;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/',Home::class)->middleware('auth');
@@ -24,6 +25,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/',Home::class);
     Route::get('/explore',Explore::class)->name('explore');
+    Route::get('/reels',LivewireReels::class)->name('reels');
 
 
 });
